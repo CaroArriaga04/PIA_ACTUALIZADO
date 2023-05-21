@@ -110,14 +110,16 @@ def mostrar_frases():
             frase.mostrar_info_frase()
 
 def eliminar_frase():
-    idfrase = input("Ingrese el id de la frase que desea eliminar: ")
-    for i in range(len(frases)):
-        if frases[i].idfrase == idfrase:
-            f = frases.pop(i)
-            idfrases.remove(idfrase)
-            print(f"La frase {f.idfrase} ha sido eliminada")
-    else:
-        print(f"La frase {idfrase} no existe")
+    id_frase=input("Ingrese el ID de la frase que desea eliminar: ")
+    for i in range (len(frases)):
+        if frases[i]['idfrase']==id_frase:
+            frase_eliminada=frases.pop(i)
+            print(f"La frase {frase_eliminada['idfrase']} ha sido eliminada")
+
+            guardar_frases(frases)#usar fucion 'def guardar_frases(frases)' para guardar las frases en el archivo de texto plano
+            return
+    
+    print(f"La frase {id_frase} no existe")
 
 def modificar_frase():
     idfrase = input("Ingrese el id de la frase a modificar: ")
