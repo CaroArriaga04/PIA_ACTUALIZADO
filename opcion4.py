@@ -1,3 +1,8 @@
+def guardar_frases(frases):
+    #para guardar las frases en el archivo de texto plano
+    pass
+
+
 def eliminar_frase():
     id_frase=input("Ingrese el ID de la frase que desea eliminar: ")
     for i in range (len(frases)):
@@ -7,4 +12,5 @@ def eliminar_frase():
 
             guardar_frases(frases)
             return
-        print(f"La frase {id_frase} no existe")
+        
+    print(f"La frase {id_frase} no existe")
