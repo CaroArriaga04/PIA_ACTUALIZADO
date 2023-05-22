@@ -2,13 +2,13 @@ frases = []
 idfrases = set()
 calificaciones = []
 
-class VFrase:
+class Frase:
     def __init__(self, idfrase, texto_frase, autor):
         self.idfrase = idfrase
         self.texto_frase = texto_frase
         self.autor = autor
-
-class Frase:
+        self.calificaciones = []
+        
     def calificaciones_prom(self):
         print(self.sacar_promedio())
 
@@ -28,15 +28,26 @@ class Frase:
     def leer_frase():
         with open("Frases.txt", "r", encoding="utf8") as xd:
             for linea in xd:
-                idfrase, texto_frase, autor = linea.strip().split(",")
-                frase = VFrase(idfrase, texto_frase, autor)
+                partes = linea.strip().split(",")
+                idfrase = partes [0]
+                texto_frase = partes [1]
+                autor = partes [2]
+                calificaciones = []
+                if len(partes) > 3:
+                    calificaciones = list(map(int, partes[3:]))
+                frase = Frase(idfrase, texto_frase, autor)
+                frase.calificaciones = calificaciones
                 frases.append(frase)
 
     def escribir_frase():
         with open("Frases.txt", "w", encoding="utf8") as amlo:
             for frase in frases:
-                amlo.write(f"{frase.idfrase},{frase.texto_frase}, {frase.autor}\n")
-
+                calificaciones_str = ",".join(map(str, frase.calificaciones))
+                if calificaciones_str:
+                    amlo.write(f"{frase.idfrase},{frase.texto_frase}, {frase.autor},{calificaciones_str}\n")
+                else:
+                    amlo.write(f"{frase.idfrase},{frase.texto_frase}, {frase.autor}\n")
+                    
     def sacar_promedio(self):
         total = 0
         count = len(self.calificaciones)
@@ -73,14 +84,14 @@ class Frase:
         return promedio, count, p1, p2, p3, p4, p5
 
 def agregar_frase():
-    idfrase = input("Ingrese el ID de la frase: ")
+    idfrase = int(input("Ingrese el ID de la frase: "))
     if idfrase in idfrases:
         print("Lo sentimos, ese ID ya existe, intente con otro por favor.")
         print("")
         return
     texto_frase = input("Ingrese la frase: ")
     autor = input("Ingrese el nombre del autor de la frase: ")
-    frase = VFrase(idfrase, texto_frase, autor)
+    frase = Frase(idfrase, texto_frase, autor)
     frases.append(frase)
     idfrases.add(idfrase)
     print("¡Frase agregada exitosamente!")
@@ -88,14 +99,14 @@ def agregar_frase():
 def mostrar_info():
     idfrase = input("Ingrese el id de la frase: ")
     frase_encontrada = False
-
     for frase in frases:
         if frase.idfrase == idfrase:
             op = input("Desea calificar esta frase S/N: ")
             if op.upper() == "S":
                 stars_calif = int(input(f"Ingresa la calificacion que le das a la frase (1 a 5): "))
-                calificaciones.append(stars_calif)
+                frase.calificaciones.append(stars_calif)
                 print("Calificacion agregada con exito!")
+            frase.mostrar_info_frase()
             frase_encontrada = True
             break
     if not frase_encontrada:
@@ -114,8 +125,10 @@ def eliminar_frase():
     for i in range(len(frases)):
         if frases[i].idfrase == idfrase:
             f = frases.pop(i)
-            idfrases.remove(idfrase)
+            if int(idfrase) in idfrases:
+                idfrases.remove(int(idfrase))
             print(f"La frase {f.idfrase} ha sido eliminada")
+            break
     else:
         print(f"La frase {idfrase} no existe")
 
@@ -136,8 +149,6 @@ def modificar_frase():
                 frase.texto_frase = modificacion_texto
                 modificacion_autor = input("Ingresa la modificacion del autor: ")
                 frase.autor = modificacion_autor
-            Frase.escribir_frase()
             print("¡Frase modificada exitosamente!")
-
             return
     print("No existe una frase con el id ingresado")

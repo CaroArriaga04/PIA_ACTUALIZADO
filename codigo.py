@@ -16,12 +16,16 @@ while True:
         clase.agregar_frase()
         Frase.escribir_frase()
     elif opcion == 2:
-        print (clase.mostrar_info())
+        clase.mostrar_info()
+        Frase.escribir_frase()
     elif opcion == 3:
         clase.mostrar_frases()
+        Frase.escribir_frase()
     elif opcion == 4:
         clase.eliminar_frase()
+        Frase.escribir_frase()
     elif opcion == 5:
         clase.modificar_frase()
+        Frase.escribir_frase()
     elif opcion == 6:
         break
