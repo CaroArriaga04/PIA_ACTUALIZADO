@@ -25,14 +25,14 @@ class Frase:
         print(f"2 estrellas: {p2}%")
         print(f"1 estrellas: {p1}%")
 
-    def ReadFrase():
+    def leer_frase():
         with open("Frases.txt", "r", encoding="utf8") as xd:
             for linea in xd:
                 idfrase, texto_frase, autor = linea.strip().split(",")
                 frase = VFrase(idfrase, texto_frase, autor)
                 frases.append(frase)
 
-    def WriteFrase():
+    def escribir_frase():
         with open("Frases.txt", "w", encoding="utf8") as amlo:
             for frase in frases:
                 amlo.write(f"{frase.idfrase},{frase.texto_frase}, {frase.autor}\n")
@@ -136,9 +136,7 @@ def modificar_frase():
                 frase.texto_frase = modificacion_texto
                 modificacion_autor = input("Ingresa la modificacion del autor: ")
                 frase.autor = modificacion_autor
-            with open("Frases.txt", "w", encoding="utf8") as amlo:
-                for frase in frases:
-                    amlo.write(f"{frase.idfrase},{frase.texto_frase}, {frase.autor}\n")
+            Frase.escribir_frase()
             print("¡Frase modificada exitosamente!")
 
             return

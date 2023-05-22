@@ -2,7 +2,7 @@ from clase import Frase
 import clase
 print("¡Bienvenido a la aplicacion de frases motivadoras!")
 
-Frase.ReadFrase()
+Frase.leer_frase()
 while True:
     print("MENU")
     print("1.- Agregar frase")
@@ -14,7 +14,7 @@ while True:
     opcion = int(input("Elige una opcion: "))
     if opcion == 1:
         clase.agregar_frase()
-        Frase.WriteFrase()
+        Frase.escribir_frase()
     elif opcion == 2:
         print (clase.mostrar_info())
     elif opcion == 3:
