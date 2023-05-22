@@ -17,10 +17,10 @@ while True:
         Frase.escribir_frase()
     elif opcion == 2:
         clase.mostrar_info()
-        Frase.escribir_frase()
+        
     elif opcion == 3:
         clase.mostrar_frases()
-        Frase.escribir_frase()
+        
     elif opcion == 4:
         clase.eliminar_frase()
         Frase.escribir_frase()

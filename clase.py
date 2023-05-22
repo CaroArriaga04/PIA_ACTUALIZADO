@@ -97,6 +97,7 @@ def agregar_frase():
     print("¡Frase agregada exitosamente!")
 
 def mostrar_info():
+    Frase.leer_frase()
     idfrase = input("Ingrese el id de la frase: ")
     frase_encontrada = False
     for frase in frases:
@@ -111,14 +112,6 @@ def mostrar_info():
             break
     if not frase_encontrada:
         print("No existe una frase con el id ingresado")
-
-def mostrar_frases():
-    if len(frases) == 0:
-        print("No hay frases registradas.")
-    else:
-        print("Información de todas las frases:")
-        for frase in frases:
-            frase.mostrar_info_frase()
 
 def eliminar_frase():
     idfrase = input("Ingrese el id de la frase que desea eliminar: ")
@@ -152,3 +145,12 @@ def modificar_frase():
             print("¡Frase modificada exitosamente!")
             return
     print("No existe una frase con el id ingresado")
+
+def mostrar_frases():
+    Frase.leer_frase()
+    if len(frases) == 0:
+        print("No hay frases registradas.")
+    else:
+        print("Información de todas las frases:")
+        for wea in frases :
+            wea.mostrar_info_frase()
