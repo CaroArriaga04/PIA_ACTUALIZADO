@@ -73,17 +73,19 @@ class Frase:
         return promedio, count, p1, p2, p3, p4, p5
 
 def agregar_frase():
-    idfrase = input("Ingrese el ID de la frase: ")
+    idfrase=input("Ingrese el ID de la frase: ")
     if idfrase in idfrases:
-        print("Lo sentimos, ese ID ya existe, intente con otro por favor.")
-        print("")
+        print("Lo sentimos, ese ID ya existe, intente con otro por favor.\n")
         return
-    texto_frase = input("Ingrese la frase: ")
-    autor = input("Ingrese el nombre del autor de la frase: ")
-    frase = VFrase(idfrase, texto_frase, autor)
+    
+    texto_frase=input("Ingrese la frase: ")
+    autor=input("Ingrese el nombre del autor de la frase: ")
+    frase=VFrase(idfrase,texto_frase,autor)
     frases.append(frase)
     idfrases.add(idfrase)
     print("¡Frase agregada exitosamente!")
+
+    Frase.WriteFrase() #escribir las frases nuevas en el archivo
 
 def mostrar_info():
     idfrase = input("Ingrese el id de la frase: ")
