@@ -73,24 +73,22 @@ class Frase:
         return promedio, count, p1, p2, p3, p4, p5
 
 def agregar_frase():
-    idfrase=input("Ingrese el ID de la frase: ")
+    idfrase = input("Ingrese el ID de la frase: ")
     if idfrase in idfrases:
-        print("Lo sentimos, ese ID ya existe, intente con otro por favor.\n")
+        print("Lo sentimos, ese ID ya existe, intente con otro por favor.")
+        print("")
         return
-    
-    texto_frase=input("Ingrese la frase: ")
-    autor=input("Ingrese el nombre del autor de la frase: ")
-    frase=VFrase(idfrase,texto_frase,autor)
+    texto_frase = input("Ingrese la frase: ")
+    autor = input("Ingrese el nombre del autor de la frase: ")
+    frase = VFrase(idfrase, texto_frase, autor)
     frases.append(frase)
     idfrases.add(idfrase)
     print("¡Frase agregada exitosamente!")
 
-    Frase.WriteFrase() #escribir las frases nuevas en el archivo
-
 def mostrar_info():
     idfrase = input("Ingrese el id de la frase: ")
     frase_encontrada = False
-    
+
     for frase in frases:
         if frase.idfrase == idfrase:
             op = input("Desea calificar esta frase S/N: ")
@@ -112,17 +110,14 @@ def mostrar_frases():
             frase.mostrar_info_frase()
 
 def eliminar_frase():
-    id_frase=input("Ingrese el ID de la frase que desea eliminar: ")
-    frase_encontrada=False
-    for i in range (len(frases)):
-        if frases[i].idfrase==id_frase:
-            frase_eliminada=frases.pop(i)
-            print(f"La frase {frase_eliminada.idfrase} ha sido eliminada")
-
-            Frase.WriteFrase()
-            return
-    
-    print(f"La frase {id_frase} no existe")
+    idfrase = input("Ingrese el id de la frase que desea eliminar: ")
+    for i in range(len(frases)):
+        if frases[i].idfrase == idfrase:
+            f = frases.pop(i)
+            idfrases.remove(idfrase)
+            print(f"La frase {f.idfrase} ha sido eliminada")
+    else:
+        print(f"La frase {idfrase} no existe")
 
 def modificar_frase():
     idfrase = input("Ingrese el id de la frase a modificar: ")
@@ -145,6 +140,6 @@ def modificar_frase():
                 for frase in frases:
                     amlo.write(f"{frase.idfrase},{frase.texto_frase}, {frase.autor}\n")
             print("¡Frase modificada exitosamente!")
-            
+
             return
     print("No existe una frase con el id ingresado")
